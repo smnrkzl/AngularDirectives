@@ -1,0 +1,38 @@
+<div class="container">
+  <nav>
+    <ul class="pagination paginationUl">
+      <li class="page-item" [ngClass]="{ disabled: currentPage === 0 }">
+        <span class="page-link" (click)="currentPage = currentPage - 1"
+          >Önceki</span
+        >
+      </li>
+
+      <ng-container *ngFor="let image of images; let i = index">
+        <li
+          class="page-item"
+          *ngIf="PageIndex(i)"
+          [ngClass]="{ active: i === currentPage }"
+        >
+          <a class="page-link" (click)="currentPage = i" href="#">{{
+            i + 1
+          }}</a>
+        </li>
+      </ng-container>
+
+      <li
+        class="page-item"
+        [ngClass]="{ disabled: currentPage === images.length - 1 }"
+      >
+        <span class="page-link" (click)="currentPage = currentPage + 1"
+          >Sonraki</span
+        >
+      </li>
+    </ul>
+  </nav>
+
+  <div class="mainImg">
+    <h4 style="color: white">{{ images[currentPage].title }}</h4>
+    <img class="Img" [src]="images[currentPage].url" alt="" />
+  </div>
+</div>
+<router-outlet></router-outlet>
